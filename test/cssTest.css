@@ -1,0 +1,44 @@
+/* CodeGuardian AI - CSS Testing Suite */
+
+/* 1. css-universal-selector (Performance) */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. css-id-selector & css-important */
+#header-container {
+    background-color: blue !important;
+    color: #FFF;
+}
+
+/* 3. css-magic-number & css-duplicate-property */
+.sidebar {
+    width: 257px;
+    height: 100vh;
+    padding: 10px;
+    padding: 15px; /* Duplicate */
+}
+
+/* 4. css-float & css-z-index-high */
+.floating-widget {
+    float: left;
+    z-index: 999999;
+}
+
+/* 5. css-outline-none (Accessibility) */
+button:focus {
+    outline: none;
+}
+
+/* 6. css-color-hex-short (Code Quality) */
+.alert-box {
+    background-color: #ff0000; /* Should be #f00 */
+}
+
+/* 7. css-vendor-prefix */
+.rounded {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

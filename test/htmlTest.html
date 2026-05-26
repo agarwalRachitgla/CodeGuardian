@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 1. html-missing-viewport -->
+    <title>HTML Test Suite</title>
+</head>
+<body>
+
+    <!-- 2. html-inline-style & html-onclick -->
+    <div style="color: red; margin: 10px;" onclick="loadData()">
+        <h1>Welcome</h1>
+    </div>
+
+    <!-- 3. html-missing-alt -->
+    <img src="banner.jpg">
+
+    <!-- 4. html-deprecated-tag -->
+    <center>
+        <marquee>Special Announcement!</marquee>
+    </center>
+
+    <!-- 5. html-empty-href & html-http-link -->
+    <a href="#">Click Here</a>
+    <a href="http://www.insecure-website.com/login">Login</a>
+
+    <!-- 6. html-inline-script -->
+    <script>
+        function loadData() {
+            alert('Loading...');
+        }
+    </script>
+</body>
+</html>
