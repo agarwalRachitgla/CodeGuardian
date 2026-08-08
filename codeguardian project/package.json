@@ -1,0 +1,174 @@
+{
+  "name": "codeguardian-ai",
+  "displayName": "CodeGuardian AI",
+  "description": "An intelligent AI-powered debugging assistant for JavaScript and TypeScript with real-time bug detection, AI explanations, and automated code fixes.",
+  "version": "1.0.0",
+  "publisher": "codeguardian",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "debugging",
+    "javascript",
+    "typescript",
+    "code-analysis",
+    "bug-detection",
+    "code-fix"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:python",
+    "onLanguage:html",
+    "onLanguage:css",
+    "onLanguage:java"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeguardian.explainCode",
+        "title": "CodeGuardian: Explain Selected Code",
+        "icon": "$(lightbulb)"
+      },
+      {
+        "command": "codeguardian.fixCode",
+        "title": "CodeGuardian: Fix Selected Code",
+        "icon": "$(wrench)"
+      },
+      {
+        "command": "codeguardian.openDebugPanel",
+        "title": "CodeGuardian: Open Debug Panel",
+        "icon": "$(bug)"
+      },
+      {
+        "command": "codeguardian.suggestNextLine",
+        "title": "CodeGuardian: Suggest Next Code Line",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "codeguardian.clearDiagnostics",
+        "title": "CodeGuardian: Clear All Diagnostics"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "codeguardian.explainCode",
+        "key": "ctrl+shift+e",
+        "mac": "cmd+shift+e",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "codeguardian.fixCode",
+        "key": "ctrl+shift+f",
+        "mac": "cmd+shift+f",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "codeguardian.openDebugPanel",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d"
+      },
+      {
+        "command": "codeguardian.suggestNextLine",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s"
+      }
+    ],
+    "configuration": {
+      "title": "CodeGuardian AI",
+      "properties": {
+        "codeguardian.groqApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Groq API key for AI-powered analysis (primary).",
+          "scope": "application"
+        },
+        "codeguardian.geminiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Google Gemini API key for AI-powered analysis (fallback).",
+          "scope": "application"
+        },
+        "codeguardian.geminiApiKeys": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Optional comma-separated list of fallback Gemini API keys (e.g. `key1,key2,key3`). The extension will automatically rotate through these keys if quotas are reached."
+        },
+        "codeguardian.enableRealTimeDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time bug detection as you type."
+        },
+        "codeguardian.enableCodeSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI-powered next-line code suggestions."
+        },
+        "codeguardian.debounceDelay": {
+          "type": "number",
+          "default": 1500,
+          "description": "Debounce delay (ms) for real-time analysis.",
+          "minimum": 500,
+          "maximum": 5000
+        },
+        "codeguardian.maxCacheSize": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of cached AI responses.",
+          "minimum": 10,
+          "maximum": 200
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "codeguardian.explainCode",
+          "group": "codeguardian@1",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "codeguardian.fixCode",
+          "group": "codeguardian@2",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "codeguardian.suggestNextLine",
+          "group": "codeguardian@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "test": "node ./dist/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0"
+  }
+}
